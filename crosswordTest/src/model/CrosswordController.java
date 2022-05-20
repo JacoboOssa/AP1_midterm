@@ -30,7 +30,6 @@ public class CrosswordController {
 			 	Cell c2 = new Cell(CellType.CLOSED,puzzle[i][j],countCell);
 			 	crossword[i][j] = c2;
 			 	countCell ++;
-
 			 }
 				
 			}
@@ -66,8 +65,22 @@ public class CrosswordController {
 	 * @return
 	 */
 	public String getHint(String letter) {
-		
-		return null;
+		String out = "";
+		boolean flag = false;
+		for (int i=0; i<crossword.length && !flag; i++) {
+			for (int j=0; j< crossword[0].length && !flag; j++) {
+
+				if(crossword[i][j].getState().equals(CellType.CLOSED) && letter.equals(crossword[i][j].getLetter())) {
+					out = "Hay una palabra con la letra " + letter + " en la casilla [" + i +"][" + j + "]";
+					crossword[i][j].setState(CellType.OPEN); 
+					flag = true;
+				} else {
+					out = "No existen palabras con la letra " + letter + " en el crucigrama";
+				}
+
+			}
+		}
+		return out;
 	}
 	
 	/**
