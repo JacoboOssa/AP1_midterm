@@ -19,9 +19,24 @@ public class CrosswordController {
 	 * the initial state of a crossword puzzle
 	 */
 	public void initCrossword(String[][] puzzle) {
-		
-		
+		int countCell = 0;
+		crossword = new Cell [4][4];
+		for (int i=0; i< puzzle.length; i++ ){
+			for (int j = 0; j < puzzle[0].length; j++) {
+			if (puzzle[i][j].equals("")){
+				Cell c1 = new Cell(CellType.BLACK,"",0);
+				crossword[i][j] = c1;
+			 } else{
+			 	Cell c2 = new Cell(CellType.CLOSED,puzzle[i][j],countCell);
+			 	crossword[i][j] = c2;
+			 	countCell ++;
+
+			 }
+				
+			}
+		}
 	}
+
 	/**
 	 * Method to verify if a crossword puzzle is initialized
 	 * @return boolean, true if it is initialized, else false
